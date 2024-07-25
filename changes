@@ -1,17 +1,17 @@
 def calculate_structure_sum(data_structure):
-  summator = []
-  if isinstance(data_structure, str):
-    summator += len(data_structure)
-  elif isinstance(data_structure, (float, int)):
-    summator += data_structure
-  elif isinstance(data_structure, (set, list, tuple)):
-    for i in data_structure:
-        summator += calculate_structure_sum(i)
-  elif isinstance(data_structure, dict):
-    for key, value in data_structure.items():
-      summator += calculate_structure_sum(key)
-      summator += calculate_structure_sum(value)
-  return summator
+    summator = 0
+    if isinstance(data_structure, str):
+        summator += len(data_structure) # тут добавляем длину элемента если он является типом str
+    elif isinstance(data_structure, (float, int)):
+        summator += data_structure # добавляем значения int и float
+    elif isinstance(data_structure, (set, list, tuple)):
+        for i in data_structure:
+            summator += calculate_structure_sum(i) # добавляем сумму значений если тип set , list, tuple
+    elif isinstance(data_structure, dict):
+        for key, value in data_structure.items():
+            summator += calculate_structure_sum(key) # добавляем длину элемента ключ
+            summator += calculate_structure_sum(value) # добавляем значение ключа
+    return summator
 
 data_structure = [
   [1, 2, 3],
@@ -20,5 +20,6 @@ data_structure = [
   "Hello",
   ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
+
 result = calculate_structure_sum(data_structure)
 print(result)
